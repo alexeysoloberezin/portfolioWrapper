@@ -1,0 +1,188 @@
+@keyframes startBannerCards {
+  0%{
+    transform: translateY(500px);
+    opacity: 0;
+  }
+  30%{
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px);
+    opacity: 0.25;
+  }
+}
+@keyframes startVideo {
+  0%{
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100%{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes hoverVideo {
+  0%{
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50%{
+    transform: translate(-50%, -50%) scale(1.07);
+  }
+  100%{
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes animateCards {
+  0%{
+    transform: translateX(calc(-50% + 800px)) rotate(-32deg) translateY(-40%) ;
+  }
+  50%{
+    transform: translateX(calc(-50% + 800px)) rotate(-32deg) translateY(0%) ;
+  }
+  100%{
+    transform: translateX(calc(-50% + 800px)) rotate(-32deg) translateY(-40%) ;
+  }
+}
+.mainBanner{
+  height: 800px;
+  position: relative;
+  display: grid;
+  grid-gap: 30px;
+  align-items: center;
+  &-wrp{
+    position: relative;
+    z-index: 5;
+    display: grid;
+    padding: 0 30px;
+    grid-template-columns: 1fr 1fr;
+  }
+  &-video{
+    position: relative;
+    width: 250px;
+    margin: 0 auto;
+    height: 250px;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0;
+    animation: startVideo forwards 0.7s 1.3s;
+    .play{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 70px;
+      height: 70px;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      transition: .3s opacity;
+      svg{
+        width: 70px;
+        height: 70px;
+        fill: #fff;
+      }
+    }
+    img{
+      width: 100%;
+      border-radius: 50%;
+      height: 100%;
+      object-fit: cover;
+      transition: .3s;
+    }
+    &:before, &:after{
+      content: '';
+      width: calc(100% + 30px);
+      height: calc(100% + 30px);
+      border-radius: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: hoverVideo 2.6s ease-in-out infinite;
+      left: 50%;
+      border: 2px solid #5665EE;
+      position: absolute;
+      opacity: 0.5;
+      transition: .6s;
+    }
+    &:after{
+      width: calc(100% + 70px);
+      height: calc(100% + 70px);
+      opacity: 0.3;
+    }
+    &:hover{
+      img{
+        filter: brightness(0.6);
+      }
+      &:before, &:after{
+        animation: hoverVideo 1.4s ease-in-out infinite;
+      }
+      .play{
+        opacity: 1;
+      }
+    }
+  }
+  &-imgs{
+    pointer-events: none;
+    position: absolute;
+    height: 800px;
+    width: 100vw;
+    z-index: 4;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    &:before{
+      content: '';
+      height: 250px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 3;
+      background: linear-gradient(#fff, rgba(255, 255, 255, 0));
+    }
+    &:after{
+      content: '';
+      height: 250px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 3;
+      background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    }
+    &-box{
+      position: absolute;
+      top: 000px;
+      left: 50%;
+      transform: translateX(calc(-50% + 800px)) rotate(-32deg);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 40px;
+      grid-column-gap: 0px;
+      width: 1000px;
+      animation: animateCards 32s ease-in-out infinite;
+
+      img{
+        border-radius: 20px;
+        width: 300px;
+        height: 500px;
+        object-fit: cover;
+        $mt: -350px;
+        $animation-delay-step: 0.15s;
+        opacity: 0;
+        &:nth-child(1), &:nth-child(4), &:nth-child(7){
+          margin-top: $mt;
+        }
+        &:nth-child(2), &:nth-child(5), &:nth-child(8){
+          margin-top: $mt / 2;
+        }
+
+
+        @for $i from 1 through 12 {
+          &:nth-child(#{$i}) {
+            animation: startBannerCards 1s ease-in-out ($i * $animation-delay-step) forwards; // Используем цикл для задержки
+          }
+        }
+      }
+    }
+  }
+}

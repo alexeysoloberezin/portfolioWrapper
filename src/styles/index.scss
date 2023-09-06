@@ -1,0 +1,152 @@
+@import "reset";
+
+@import "fonts";
+@import "vars";
+@import "templates";
+@import "typograffy";
+@import "libs/swiper.css";
+
+body,html{
+    max-width: 100vw;
+    width: 100%;
+    overflow-x: hidden;
+    font-size: 16px;
+}
+body{
+}
+.bg{
+    position: absolute;
+    top: 0;
+    left: 0 ;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.2;
+}
+body, *{
+    box-sizing: border-box;
+    font-family: 'Gotham Pro', sans-serif !important;
+}
+img{
+    max-width: 100%;
+}
+.container{
+    max-width: 1430px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+.header{
+    position: relative;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 20px;
+    padding: 10px 30px;
+    margin: 0 auto;
+    max-width: 2100px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(64, 140, 161, 0.13);
+    &.header{
+        &, .header__nav{
+            background: transparent;
+        }
+    }
+    &__nav{
+        grid-gap: 20px;
+        border-bottom: none !important;
+    }
+}
+.logo{
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    img{
+        max-width: 45px;
+    }
+    div{
+        font-size: 20px;
+        font-weight: 600;
+        color: $primary;
+    }
+}
+
+.dashed-border-button {
+    border: 1px dashed rgba(0, 0, 0, 0.15); /* Граница пунктирной линией */
+    padding: 10px 20px; /* Отступы */
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.blue-blur{
+    width: 571.28px;
+    transform: translate(90%, 90%);
+    background: #b5c9ff;
+}
+.blue-blur, .green-blur {
+    top: 40%;
+    left: 40%;
+    height: 358px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    opacity: 0.3;
+    filter: blur(150px);
+}
+.green-blur {
+    width: 791px;
+
+    background: linear-gradient(133.63deg, #d5669e 14.35%, #777ff0 87.65%);
+}
+
+.icon{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #333;
+    padding: 5px;
+    object-fit: contain;
+}
+.subtitle{
+    position: relative;
+    font-size: 15px;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    &:before{
+        content: '';
+        background: $primary;
+        width: 20px;
+        height: 2px;
+        position: absolute;
+        top: 9px;
+        left: 0;
+    }
+}
+.text-primary{
+    color: $primary;
+}
+.icon-text{
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    width: fit-content;
+    border-radius: 50px;
+    align-items: center;
+    height: 45px;
+    background: #016A70;
+    color: #fff;
+    min-width: 100px;
+    padding: 0 20px 4px;
+}
+@import "blocks/bannerMain";
+@import "blocks/canHelp";
+@import "blocks/portfolio";
+@import "blocks/aboutMe";
+@import "blocks/case";
+@import "blocks/cases";
+@import "blocks/admin";
+@import "libs/iphone";

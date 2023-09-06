@@ -1,0 +1,56 @@
+.grid{
+  display: grid;
+}
+.flex{
+  display: flex;
+}
+.align-center{
+  align-items: center;
+}
+.gtc-2{
+  grid-template-columns: 1fr 1fr;
+}
+
+$space: 5px;
+$gap-values: 5, 10, 15;
+
+@for $i from 1 through length($gap-values) {
+  .gap-#{$i} {
+    grid-gap: nth($gap-values, $i) + $space;
+  }
+}
+
+@for $i from 1 through 3 {
+  .my-#{$i} {
+    margin-top: $space * $i;
+    margin-bottom: $space * $i;
+  }
+  .mt-#{$i} {
+    margin-top: $space * $i;
+  }
+  .mb-#{$i} {
+    margin-bottom: $space * $i;
+  }
+  .ml-#{$i} {
+    margin-left: $space * $i;
+  }
+  .mr-#{$i} {
+    margin-right: $space * $i;
+  }
+  .py-#{$i} {
+    padding-top: $space * $i;
+    padding-bottom: $space * $i;
+  }
+  .pt-#{$i} {
+    padding-top: $space * $i;
+  }
+  .pb-#{$i} {
+    padding-bottom: $space * $i;
+  }
+  .pl-#{$i} {
+    padding-left: $space * $i;
+  }
+  .pr-#{$i} {
+    padding-right: $space * $i;
+  }
+}

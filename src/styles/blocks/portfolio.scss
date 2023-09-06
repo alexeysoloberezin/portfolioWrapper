@@ -1,0 +1,42 @@
+.portfolio{
+  padding: 100px 0;
+  &__wrp{
+
+  }
+  &__img{
+    margin-top: 60px;
+  }
+  &__it{
+    position: relative;
+    display: grid;
+    grid-gap: 30px;
+    padding-bottom: 50px;
+    grid-template-columns: 1fr 1fr;
+
+    h5{
+      margin-top: 20px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+    img{
+      //position: absolute;
+      //top: 0;
+      //width: 100%;
+      //height: 100%;
+      object-fit: cover;
+      border-radius: $borderRadius;
+      z-index: 2;
+      box-shadow: $shadow;
+    }
+    &-box{
+
+    }
+  }
+  &__statistic{
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 25px;
+  }
+}
