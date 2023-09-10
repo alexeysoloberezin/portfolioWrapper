@@ -3,6 +3,7 @@ import Header from "../../components/common/Header";
 import MainBannerImages from "../../components/ui/MainBannerImages";
 import {Button, Form, Input, Select, Upload} from "antd";
 import {getLinks, getTags} from "../../types/Portfolio";
+import Footer from "../../components/common/Footer";
 
 const TagsOptions = getTags()
 const LinksOptions = getLinks()
@@ -56,6 +57,9 @@ const Cases = () => {
           <MainBannerImages />
         </div>
       </section>
+
+      <Footer />
+
     </>
   );
 };

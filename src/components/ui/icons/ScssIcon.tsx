@@ -1,9 +1,9 @@
 import React from 'react';
 
-const PrimeIcon = () => {
+const ScssIcon = () => {
   return (
-    <img className={"icon"} src="/icons/primevue.jpg" alt=""/>
+    <img className={"icon"} src="/icons/c.png" alt=""/>
   );
 };
 
-export default PrimeIcon;
+export default ScssIcon;

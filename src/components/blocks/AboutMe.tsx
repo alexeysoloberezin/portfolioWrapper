@@ -1,7 +1,43 @@
 import React from 'react';
 import {Button} from "antd";
+import type {CollapseProps} from 'antd';
+import {Collapse} from 'antd';
+import { useTranslation } from "react-i18next";
+import ModalContacts from "../common/ModalContacts";
+
 
 const AboutMe = () => {
+  const { t } = useTranslation();
+
+  const items: CollapseProps['items'] = [
+    {
+      key: '1',
+      label: <h5 className={"text-lg"} style={{lineHeight: "11px"}}>{t('InfoAboutmeTitle')}</h5>,
+      children: <div dangerouslySetInnerHTML={{__html: t('InfoAboutMe')}}></div>,
+    },
+    {
+      key: '2',
+      label: <h5 className={"text-lg"} style={{lineHeight: "11px"}}>What i can</h5>,
+      children: <ul style={{listStyleType: "circle"}} className={"pl-3 ml-1"} dangerouslySetInnerHTML={{__html: t('WhatICan')}}>
+        </ul>,
+    },
+    {
+      key: '3',
+      label: <h5 className={"text-lg"} style={{lineHeight: "11px"}}>What i worked with</h5>,
+      children: <ul style={{listStyleType: "circle"}} className={"pl-3 ml-1"}>
+        <li className={"mb-2"}><b>Frameworks:</b> Vue, Nuxt, React</li>
+        <li className={"mb-2"}><b>Api:</b> Rest api, GraphQL, Swagger, Postman, Firebase</li>
+        <li className={"mb-2"}><b>Ui libs:</b> Vuetify, Material ui, VuePrime, Bootstrap, Ant design</li>
+        <li className={"mb-2"}><b>Bundler/Context:</b> Gulp, Webpack, Docker, Nginx, Git(GitFlow)</li>
+        <li className={"mb-2"}><b>Code:</b> TypeScript, JavaScript (ES6+), JQuery</li>
+        <li className={"mb-2"}><b>CSS:</b> Scss, Sass, BEM</li>
+        <li className={"mb-2"}><b>Storage:</b> Cookies, LocalStorage, Pinia, Vuex, Redux, R.Toolkit, Mobx</li>
+        <li className={"mb-2"}><b>Other:</b> Express, Puppeteer, Prettier, Ui/Ux</li>
+      </ul>,
+    },
+  ];
+
+
   return (
     <section className="aboutMe">
       <div className="container">
@@ -12,37 +48,15 @@ const AboutMe = () => {
               <img src={"/me2.jpg"} alt=""/>
             </div>
             <div className={"aboutMe-btns"}>
-              <Button type="primary" size={'large'}>Свяжитесь со мной</Button>
-              <Button  size={'large'} >Узнать больше</Button>
+              <ModalContacts size={"large"}/>
+              <Button size={'large'}>{t('ReadMore')}</Button>
             </div>
           </div>
           <div className="aboutMe__r">
-            <h2 className="text-4xl font-bold mb-4">About Me</h2>
+            <h2 className="text-4xl font-bold mb-3 pb-3">{t('AboutMe')}</h2>
             <div>
-              <p className="text-lg mb-8">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid asperiores aut consequatur dicta
-                doloribus dolorum, est ipsam maiores modi nihil numquam optio, quam quasi qui, quibusdam quisquam quos
-                ratione velit? Consequatur earum excepturi illo labore maxime nobis placeat reprehenderit tempora
-                temporibus voluptates? Accusantium, cupiditate facilis illo inventore ipsum laboriosam tempora ullam?
-                Dolor ipsa, iure magnam maiores neque nobis officiis tempore. Ab accusamus accusantium animi architecto
-                consectetur culpa deleniti fugit incidunt nihil optio pariatur quae, quaerat quis quos, ratione
-                reprehenderit, sed soluta suscipit tempora velit! A at, blanditiis eos error est ex facilis itaque iusto
-                modi nostrum possimus quam quia quibusdam quisquam repudiandae sapiente sed totam veritatis. Ab
-                accusamus consequuntur, corporis, dignissimos ea exercitationem facilis illo maiores, minus molestias
-                provident quisquam repellat saepe tempora vitae!
-
-              </p>
-              <p>A amet aperiam aspernatur consectetur consequatur consequuntur corporis, culpa delectus deleniti
-                distinctio dolores est et, eveniet ex excepturi id inventore iste laboriosam magnam maiores mollitia
-                natus necessitatibus neque officiis quo, quod reprehenderit sed sit tenetur totam ullam unde ut
-                voluptatum. Aspernatur autem illo officiis perspiciatis quia quibusdam rerum ullam voluptas. Architecto
-                asperiores dignissimos eos, facilis harum incidunt necessitatibus nobis praesentium, provident quidem
-                repellat ullam vero voluptatem. Culpa delectus dolorem ex in minima praesentium repellat. Accusantium ad
-                aliquid corporis doloremque doloribus eos minus officia soluta tempore voluptates! Beatae blanditiis
-                distinctio est fugiat molestias mollitia quibusdam, ratione repellat repudiandae totam unde vero
-                voluptas voluptate.</p>
+              <Collapse accordion items={items} defaultActiveKey={'1'} bordered={false}/>;
             </div>
-
           </div>
         </div>
       </div>

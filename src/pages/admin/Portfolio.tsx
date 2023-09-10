@@ -3,6 +3,9 @@ import Sidebar from "./ui/Sidebar";
 import {Button, Form, Input, Select, Upload} from 'antd';
 import firebase from "firebase/compat/app";
 import {getLinks, getTags, PortfolioItem} from "../../types/Portfolio";
+import {UploadOutlined} from '@ant-design/icons';
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
+import {storage} from '../../App';
 
 const TagsOptions = getTags()
 const LinksOptions = getLinks()
@@ -16,31 +19,43 @@ const Portfolio = () => {
     setLoading(true);
 
     try {
-      // const db = firebase.firestore();
-      // const portfolioRef = db.collection('portfolio').doc('T7zXc2chQljB1M040q9I');
-      //
-      // const portfolioDoc = await portfolioRef.get();
-      // const portfolioData: any = portfolioDoc.exists ? portfolioDoc.data() : {};
+      const db = firebase.firestore();
+      const portfolioRef = db.collection('portfolio').doc('T7zXc2chQljB1M040q9I');
+
+      const portfolioDoc = await portfolioRef.get();
+      const portfolioData: any = portfolioDoc.exists ? portfolioDoc.data() : {};
 
       fileList.forEach(file => {
         values[file.name] = file.url
       })
 
+      const updatedPortfolio = [
+        ...(portfolioData.portfolio || []),
+        {
+          ...values,
+          id: new Date().getTime(),
+        },
+      ];
 
-      console.log(values)
-      // const updatedPortfolio = [
-      //   ...(portfolioData.portfolio || []),
-      //   {
-      //     ...values,
-      //     id: new Date().getTime(),
-      //   },
-      // ];
-      //
-      // const rs = await portfolioRef.set({portfolio: updatedPortfolio}, {merge: true});
+      const rs = await portfolioRef.set({portfolio: updatedPortfolio}, {merge: true});
     } catch (err) {
       console.error('err', err)
     }
     setLoading(false);
+  };
+
+  const beforeUpload = async (file: any) => {
+    try {
+      const storageRef = ref(storage, `images/${file.name}`);
+      await uploadBytes(storageRef, file); // Upload the file
+      console.log(getDownloadURL(storageRef))
+      const url = await getDownloadURL(storageRef);
+      setFileList([...fileList, {name: 'img', url}]);
+      return !!url
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return false; // Prevent immediate upload in case of error
+    }
   };
 
   return (

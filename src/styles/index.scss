@@ -37,32 +37,14 @@ img{
     margin: 0 auto;
     padding: 0 15px;
 }
-.header{
-    position: relative;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    grid-gap: 20px;
-    padding: 10px 30px;
-    margin: 0 auto;
-    max-width: 2100px;
-    background: #fff;
-    box-shadow: 0 0 5px rgba(64, 140, 161, 0.13);
-    &.header{
-        &, .header__nav{
-            background: transparent;
-        }
-    }
-    &__nav{
-        grid-gap: 20px;
-        border-bottom: none !important;
-    }
+#root{
+    height: 100vh;
 }
 .logo{
     display: flex;
     align-items: center;
     grid-gap: 10px;
+    text-decoration: none;
     img{
         max-width: 45px;
     }
@@ -101,6 +83,9 @@ img{
 
     background: linear-gradient(133.63deg, #d5669e 14.35%, #777ff0 87.65%);
 }
+b{
+    font-weight: 500;
+}
 
 .icon{
     width: 45px;
@@ -108,7 +93,7 @@ img{
     border-radius: 50%;
     background: #333;
     padding: 5px;
-    object-fit: contain;
+    object-fit: cover;
 }
 .subtitle{
     position: relative;
@@ -142,6 +127,37 @@ img{
     min-width: 100px;
     padding: 0 20px 4px;
 }
+.tagsComp{
+    display: flex;
+    width: fit-content;
+    flex-wrap: wrap;
+    grid-gap: 7px;
+}
+
+.contacts{
+    &__wrp{
+        display: flex;
+        flex-direction: column;
+        grid-gap: 10px;
+    }
+    &__it{
+        display: flex;
+        align-items: center;
+        color: #000;
+        b{
+            margin-right: 5px;
+        }
+        img{
+            max-width: 40px;
+            min-width: 30px;
+            height: 30px;
+            object-fit: contain;
+            margin-right: 10px;
+        }
+    }
+}
+@import "blocks/header";
+@import "blocks/footer";
 @import "blocks/bannerMain";
 @import "blocks/canHelp";
 @import "blocks/portfolio";

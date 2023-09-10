@@ -1,9 +1,9 @@
 import React from 'react';
 
-const VueIcon = () => {
+const PrimeIcon = () => {
   return (
-    <img className={"icon"} src="/icons/vuelogo.png" alt=""/>
+    <img className={"icon"} src="/icons/primevue.jpg" alt=""/>
   );
 };
 
-export default VueIcon;
+export default PrimeIcon;

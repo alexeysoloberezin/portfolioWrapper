@@ -20,7 +20,10 @@ import {PortfolioItem} from "../types/Portfolio";
 import MainBannerImages from "../components/ui/MainBannerImages";
 import AboutMe from "../components/blocks/AboutMe";
 import {getPortfolio} from "../firestore/api";
-
+import TagsComp from "../components/ui/Tags";
+import Footer from "../components/common/Footer";
+import ModalContacts from "../components/common/ModalContacts";
+import { useTranslation } from "react-i18next";
 
 const canIHelp = [
   {
@@ -68,15 +71,16 @@ interface ICarouselRef {
 }
 
 const HomePage = () => {
+  const { t } = useTranslation();
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([])
 
   const carouselSettings = {
-    dots: true, // Отображать точки для навигации
-    infinite: true, // Бесконечная прокрутка
-    speed: 1500, // Скорость прокрутки в миллисекундах
+    dots: true,
+    infinite: true,
+    speed: 1500,
     autoplay: true,
-    slidesToShow: 1, // Количество отображаемых слайдов за раз
-    slidesToScroll: 1 // Количество прокручиваемых слайдов за раз
+    slidesToShow: 1,
+    slidesToScroll: 1
   };
   const carouselRef = useRef<ICarouselRef>(null);
   const nextSlide = () => {
@@ -85,10 +89,10 @@ const HomePage = () => {
     }
   };
 
-  const fetchPortfolio = async () => {
+  const fetchPortfolio = async () => { // Rename the function
     try {
       const portfolioData = await getPortfolio();
-      if (!portfolioData || portfolioData.length === 0) return null;
+      if (!portfolioData) return null;
       setPortfolio(portfolioData);
     } catch (error) {
       console.error('Error fetching portfolio:', error);
@@ -101,22 +105,16 @@ const HomePage = () => {
   return (
     <div>
       <Header/>
-
       <section className={'mainBanner'}>
         <div className="container">
           <div className={'mainBanner-wrp'}>
             <div className={'mainBanner-l'}>
-              <h1>Привет! Я <span className={'text-primary'}>Frontend</span> Разработчик с опытом в <span
-                className={'text-primary'}>Vue.js</span> и <span className={'text-primary'}>React</span></h1>
-              <p className={'py-3'}>Приветствую на моем сайте! Я - опытный Frontend разработчик с углубленными знаниями
-                Vue.js и React. Моя
-                страсть к созданию взаимодействующих пользовательских интерфейсов побуждает меня создавать
-                высокопроизводительные веб-приложения. С опытом работы над разнообразными проектами, я стремлюсь к
-                созданию масштабируемых и гибких решений, которые удовлетворят потребности вашего бизнеса и обеспечат
-                лучший опыт для пользователей.</p>
+              <h1 dangerouslySetInnerHTML={{__html: t('Title')}}>
+              </h1>
+              <p className={'py-3'}>{t('Text')}</p>
               <div className={'flex gap-2'}>
-                <Button type="primary" size={'large'}>Свяжитесь со мной</Button>
-                <Button size={'large'}>Мои Кейсы</Button>
+                <ModalContacts size={"large"} />
+                <Button size={'large'}>{t('MyCases')}</Button>
               </div>
             </div>
             <div>
@@ -142,7 +140,7 @@ const HomePage = () => {
                       <div className={'my-3 subtitle'}>{item.text}</div>
                       <div className={'flex gap-2 canHelp__btns'}>
                         <Button className={'mt-2'} type={'primary'} size={'large'}>
-                          Читать подробнее
+                          {t('ReadMore')}
                         </Button>
                         <Button className={'mt-2'} size={'large'} onClick={nextSlide}>
                           <RightOutlined/>
@@ -171,17 +169,13 @@ const HomePage = () => {
                       <h2>{item.title}</h2>
                       <h5 dangerouslySetInnerHTML={{ __html: item.text }}></h5>
                       {Array.isArray(item.images) && item.images.length > 0 &&
-                        <img src={item.images[0]} alt={'asd'} className="portfolio__img"/>
+                        <img src={item.images[0].link} alt={'asd'} className="portfolio__img"/>
                       }
                     </div>
                     <div>
                       <div>
                         <div className={'subtitle mb-2'}>Теги:</div>
-                        {item.tags ? item.tags.map((tag, idx) => (
-                          <Tag color="success" key={idx}>
-                            {tag}
-                          </Tag>
-                        )) : null}
+                        <TagsComp tags={item.tags || []} />
                       </div>
                       <div className={'mt-3'}>
                         <div className={'subtitle mb-2'}>Статистика:</div>
@@ -199,12 +193,6 @@ const HomePage = () => {
                             valueStyle={{color: '#3f8600'}}
                             prefix={<LikeOutlined/>}
                           />
-                          {/*<Statistic*/}
-                          {/*  title="Цена"*/}
-                          {/*  value={item.statistic?.price}*/}
-                          {/*  valueStyle={{color: '#3f8600'}}*/}
-                          {/*  prefix={'₽'}*/}
-                          {/*/>*/}
                           <Statistic
                             title="Дата выполнения"
                             value={item.statistic?.date}
@@ -244,9 +232,7 @@ const HomePage = () => {
       <AboutMe />
 
       {/* Футер */}
-      <footer className="bg-gray-800 text-white p-4 text-center">
-        <p>Все права защищены © Год создания</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

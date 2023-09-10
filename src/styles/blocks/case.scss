@@ -1,6 +1,7 @@
 .case {
   padding-bottom: 200px;
-
+  position: relative;
+  z-index: 20;
   &__banner {
     position: relative;
     z-index: 2;
@@ -334,10 +335,10 @@
   }
   &-head-l{}
   &-head-c{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    grid-gap: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      grid-gap: 10px;
   }
  &-reviews{
    position: relative;

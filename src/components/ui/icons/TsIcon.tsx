@@ -1,9 +1,9 @@
 import React from 'react';
 
-const VueIcon = () => {
+const TsIcon = () => {
   return (
-    <img className={"icon"} src="/icons/vuelogo.png" alt=""/>
+    <img className={"icon"} src="/icons/ts.svg" alt=""/>
   );
 };
 
-export default VueIcon;
+export default TsIcon;

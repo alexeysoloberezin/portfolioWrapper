@@ -1,6 +1,6 @@
 import {PortfolioItem, SocialLinks, Tags} from "../types/Portfolio";
 
-export const portfolio: PortfolioItem[] = [
+export const portfolio = [
   {
     "id": "1693819293642",
     "title": "Movie Cinema",

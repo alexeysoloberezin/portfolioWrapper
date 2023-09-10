@@ -1,10 +1,11 @@
 export interface PortfolioItem {
+  img: string;
   title: string;
   subtitle: string;
   text: string;
-  id?: string;
+  id?: number;
   tags?: Tags[];
-  images?: string[];
+  images?: {link: string}[];
   links?: {
     name: SocialLinks;
     link: string;
@@ -21,6 +22,7 @@ export interface PortfolioItem {
 export interface CaseStep {
   title: string,
   content: string,
+  images: string[]
 }
 
 export interface Review {
@@ -57,6 +59,7 @@ export enum Tags {
   Eslint="Eslint",
   Prettier="Prettier",
   SCSS="SCSS/SASS",
+  Design="Design",
 }
 
 export const getTags = (): {label: Tags, value: Tags}[] => Object.values(Tags).map(item => ({label: item, value: item}));

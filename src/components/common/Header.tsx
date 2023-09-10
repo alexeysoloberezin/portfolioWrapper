@@ -6,15 +6,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {AuthState, setCurrentUser} from "../../store/authSlice";
 import {Link, useNavigate} from "react-router-dom";
 import firebase from 'firebase/compat/app';
+import {MenuItems} from "../../types/Navigation";
+import Logo from "../ui/Logo";
 
 const HeaderMenu = () => {
-  const menuItems = [
-    { key: 'home', label: 'Главная', link: '/' },
-    { key: 'about', label: 'Обо мне', link: '/about' },
-    { key: 'portfolio', label: 'Портфолио', link: '/portfolio' },
-    { key: 'contact', label: 'Контакты', link: '/contact' },
-    { key: 'faq', label: 'Faq', link: '/faq' },
-  ];
+  const menuItems = MenuItems;
 
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
@@ -88,10 +84,7 @@ const Header = (props: any) => {
 
   return (
     <div className={props.transparent ? "header header-transparent" : 'header'}>
-      <Link to={'/'} className="logo">
-        <img src={logo} alt=""/>
-        <div>LL</div>
-      </Link>
+      <Logo />
       <HeaderMenu />
       {currentUser?.email ? <UserMenu isAdmin={currentUser?.email === 'alexeysoloberezinsolo@gmail.com'}/> : <Button onClick={signInWithGoogle}>Login</Button>}
     </div>

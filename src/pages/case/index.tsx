@@ -14,6 +14,7 @@ import {getPortfolio} from "../../firestore/api";
 import {PortfolioItem} from "../../types/Portfolio";
 import {useParams} from "react-router-dom";
 import TagsComp from "../../components/ui/Tags";
+import Footer from "../../components/common/Footer";
 
 const {Search} = Input;
 
@@ -29,7 +30,7 @@ const Case = () => {
       const portfolioData = await getPortfolio(id); // Use a different variable name
       if (!portfolioData) return null;
       console.log('portfolioData', portfolioData)
-      // setPortfolio(portfolioData);
+      setPortfolio(portfolioData);
     } catch (error) {
       console.error('Error fetching portfolio:', error);
     }
@@ -41,7 +42,7 @@ const Case = () => {
 
   useEffect(() => {
     console.log('portfolio', portfolio)
-    if(portfolio){
+    if (portfolio) {
       const swiper = new Swiper('.step-swiper', {
         // Настройки Swiper
         slidesPerView: 4,
@@ -62,7 +63,6 @@ const Case = () => {
     }
 
 
-
   }, [portfolio])
 
   return (
@@ -76,13 +76,13 @@ const Case = () => {
               <div className="case__banner-l">
                 <div className="subtitle">{portfolio.subtitle}</div>
                 <h1>{portfolio.title}</h1>
-                <p dangerouslySetInnerHTML={{ __html: portfolio.text }}></p>
+                <p dangerouslySetInnerHTML={{__html: portfolio.text}}></p>
                 <Button type="primary" size={'large'}>Свяжитесь со мной</Button>
               </div>
               <div className="case__banner-r">
                 <div className="case__banner-img">
                   {portfolio?.images?.map((item, index) => (
-                    index < 4 &&  <img key={item} src={item} alt=""/>
+                    index < 4 && <img key={item.link} src={item.link} alt=""/>
                   ))}
                 </div>
               </div>
@@ -109,15 +109,27 @@ const Case = () => {
                           {step.content}
                         </div>
                         <div className={"case__steps-imgs"}>
+                          {/*<Image.PreviewGroup*/}
+                          {/*  items={step.images}*/}
+                          {/*>*/}
+                          {/*  <Image*/}
+                          {/*    src={step.images[0]}*/}
+                          {/*  />*/}
+                          {/*</Image.PreviewGroup>*/}
                         </div>
                       </div>
                     </div>
-                  )) }
+                  ))}
                 </div>
                 <div className="swiper-button-prev"></div>
                 <div className="swiper-button-next"></div>
 
               </div>
+              {/*<div className={"case__steps-r"}>*/}
+              {/*  <div className="case__steps-r-box">*/}
+              {/*   */}
+              {/*  </div>*/}
+              {/*</div>*/}
             </div>
           </div>
 
@@ -126,13 +138,12 @@ const Case = () => {
               <div className="case__info-head">
                 <div className="case__info-head-l">
                   <h3><span className={"text-primary"}>Reviews</span><br/>about mediation</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab autem doloribus in mollitia quibusdam
-                    recusandae unde ut vero voluptate voluptatem.</p>
+                  <p>Вы можете видеть какие технологии использованы,<br/> обратную связь, отзывы.</p>
                 </div>
                 <div>
                   <div className="subtitle">What i use/did in project</div>
                   <div className="case__info-head-c">
-                    <TagsComp tags={portfolio.tags || []} />
+                    <TagsComp tags={portfolio.tags || []}/>
                   </div>
                 </div>
               </div>
@@ -141,12 +152,14 @@ const Case = () => {
 
           <Reviews reviews={portfolio.reviews || []}/>
 
-          <MasonryLayout images={[]}/>
+          <MasonryLayout images={portfolio.images || []}/>
 
           <AboutMe/>
         </div>
         : 'Sorry not good id'
       }
+
+      <Footer />
     </>
   );
 };
