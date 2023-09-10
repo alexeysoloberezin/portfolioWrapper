@@ -231,7 +231,6 @@ const HomePage = () => {
 
       <AboutMe />
 
-      {/* Футер */}
       <Footer />
     </div>
   );

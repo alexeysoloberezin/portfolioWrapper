@@ -3,7 +3,6 @@ import Sidebar from "./ui/Sidebar";
 import {Button, Form, Input, Select, Upload} from 'antd';
 import firebase from "firebase/compat/app";
 import {getLinks, getTags, PortfolioItem} from "../../types/Portfolio";
-import {UploadOutlined} from '@ant-design/icons';
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {storage} from '../../App';
 
