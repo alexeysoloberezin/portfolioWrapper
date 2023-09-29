@@ -7,6 +7,7 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from './store/store';
 import Portfolio from "./pages/admin/Portfolio";
 import CanIHelp from "./pages/admin/CanIHelp";
+import LiveCodding from "./pages/LiveCodding";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
@@ -52,7 +53,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/auth" element={<Auth/>}/>
-            <Route path="/cases/" element={<Cases/>}/>
+            <Route path="/liveCodding" element={<LiveCodding/>}/>
+            <Route path="/cases" element={<Cases/>}/>
             <Route path="/case/:id" element={<Case/>}/>
 
             <Route path='/admin/portfolio' element={<Portfolio/>}/>

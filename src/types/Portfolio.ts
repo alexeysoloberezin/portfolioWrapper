@@ -49,6 +49,7 @@ export enum Tags {
   Vue = "Vue",
   React = "React",
   Vite = "Vite",
+  Nuxt="Nuxt",
   Vuex = "Vuex",
   Pinia = "Pinia",
   Firebase = "Firebase",

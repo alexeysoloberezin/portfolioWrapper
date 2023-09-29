@@ -1,7 +1,6 @@
 import React from 'react';
 import {Menu, Button, Dropdown, MenuProps} from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
-import logo from '../../icons/logo.svg'
 import {useDispatch, useSelector} from "react-redux";
 import {AuthState, setCurrentUser} from "../../store/authSlice";
 import {Link, useNavigate} from "react-router-dom";
@@ -11,9 +10,10 @@ import Logo from "../ui/Logo";
 
 const HeaderMenu = () => {
   const menuItems = MenuItems;
+  const navigate = useNavigate();
 
   const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
+    navigate(e.key)
   };
 
   return (
